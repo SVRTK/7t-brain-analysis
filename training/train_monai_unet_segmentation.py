@@ -88,8 +88,8 @@ roi_type = sys.argv[10]
 root_dir=files_path
 os.chdir(root_dir)
 
-degree_min = -1.0
-degree_max = 1.0 
+degree_min = -0.1
+degree_max = 0.1
 
 train_transforms = Compose(
     [

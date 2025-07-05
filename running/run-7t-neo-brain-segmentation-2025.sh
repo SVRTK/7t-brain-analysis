@@ -7,16 +7,17 @@ mirtk=/software/MIRTK/build/lib/tools
 
 org_t2=$1
 proc=$2
-out_lab=$3
+out_bounti_lab=$3
+out_wm_lab=$4
 
 
-if [[ $# -ne 3 ]] ; then
+if [[ $# -ne 4 ]] ; then
 
     echo
     echo "------------------------------------------------------------"
     echo
     echo "Usage: please use the following format ..."
-    echo "bash run-7t-neo-brain-segmentation-2025.sh [path_to_input_t2w_recon.nii.gz] [path_to_folder_for_tmp_processing] [path_to_output_label.nii.gz]"
+    echo "bash run-7t-neo-brain-segmentation-2025.sh [path_to_input_t2w_recon.nii.gz] [path_to_folder_for_tmp_processing] [path_to_output_label.nii.gz] [path_to_wm_label.nii.gz]"
     echo
     echo "------------------------------------------------------------"
     echo
@@ -113,12 +114,30 @@ echo
 unset PYTHONPATH ; 
 python ${src}/run_monai_patch_unet_segmentation_1case-2025-gpu.py 128 43 ${src}/patch_unet_new_multi_43_brain_neo_7t_aff_best_metric_model.pth ${proc}/tr-n4-t2.nii.gz ${proc}/multi-lab-tr-t2.nii.gz
 
-${mirtk}/transform-image ${proc}/multi-lab-tr-t2.nii.gz ${out_lab} -target ${proc}/org-t2.nii.gz  -dofin_i ${proc}/aff-d.dof -labels
-
-# cp ${proc}/multi-lab-org-t2.nii.gz ${proc}/org-t2.nii.gz ${out_lab}
+${mirtk}/transform-image ${proc}/multi-lab-tr-t2.nii.gz ${out_bounti_lab} -target ${proc}/org-t2.nii.gz  -dofin_i ${proc}/aff-d.dof -labels
 
 
-if [[ ! -f ${out_lab} ]];then
+
+echo 
+echo "------------------------------------------------------------"
+echo
+echo " - RUNNING WM SEGMENTATION ... "
+echo
+echo "------------------------------------------------------------"
+echo
+  
+
+unset PYTHONPATH ; 
+python ${src}/run_monai_unet_segmentation_1case-2025-gpu.py 256 20 ${src}/unet_wm_brain_7t_20lab_best_metric_model.pth ${proc}/tr-n4-t2.nii.gz ${proc}/wm-lab-tr-t2.nii.gz
+
+${mirtk}/transform-image ${proc}/wm-lab-tr-t2.nii.gz ${out_wm_lab} -target ${proc}/org-t2.nii.gz  -dofin_i ${proc}/aff-d.dof -labels
+
+
+
+# cp ${proc}/multi-lab-org-t2.nii.gz ${proc}/org-t2.nii.gz ${out_bounti_lab}
+
+
+if [[ ! -f ${out_bounti_lab} ]];then
 
     echo 
     echo "------------------------------------------------------------"
@@ -136,7 +155,9 @@ else
     echo
     echo "------------------------------------------------------------"
     echo
-    echo " - output label : " ${out_lab}
+    echo " - output BOUNTI label : " ${out_bounti_lab}
+    echo
+    echo " - output WM label : " ${out_wm_lab}
     echo
     echo "------------------------------------------------------------"
     echo
