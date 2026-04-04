@@ -68,8 +68,9 @@ Citation and acknowledgements
 In case you found this repository useful please give appropriate credit to the software.
 
 
-**Brain tissue segmentation:**
-> Uus, A. U., Kyriakopoulou, V., Makropoulos, A., Fukami-Gartner, A., Cromb, D., Davidson, A., Cordero-Grande, L., Price, A. N., Grigorescu, I., Williams, L. Z. J., Robinson, E. C., Lloyd, D., Pushparajah, K., Story, L., Hutter, J., Counsell, S. J., Edwards, A. D., Rutherford, M. A., Hajnal, J. V., Deprez, M. (2023) BOUNTI: Brain vOlumetry and aUtomated parcellatioN for 3D feTal MRI. eLife 12:RP88818; doi: https://doi.org/10.7554/eLife.88818.1
+** Internal capsule segmentation:**
+> Chiara Casella, Alena Uus, Luke Dedominicis, Jucha Willers Moore, Benjamin Clayden, Emil Galanides, Philippa Bridgen, Pierluigi Di Cio, Ines Tomazinho, Cidalia Da Costa, Dario Gallo, Sophie Arulkumaran, Maria Deprez, Serena J. Counsell, Joseph V. Hajnal, Jonathan O’Muircheartaigh, Mary A. Rutherford, Shaihan Malik, Tomoki Arichi. (2026) Automated assessment of neonatal internal capsule maturation on T2-weighted MRI
+across 7T and 3T. MedrXiv; doi: https://doi.org/****
 
 
 
