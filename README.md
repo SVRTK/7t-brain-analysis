@@ -1,7 +1,7 @@
-Scripts for automated 7t neonatal brain analysis docker
+Scripts for automated 7t neonatal brain analysis 
 ====================
 
-This repository contains the pipelines for [MONAI](https://github.com/Project-MONAI/MONAI)-based automated analysis for 7T neonatal brain MRI [SVRTK dockers](https://hub.docker.com/r/fetalsvrtk/svrtk).
+This repository contains the pipelines for [MONAI](https://github.com/Project-MONAI/MONAI)-based automated analysis for 7T neonatal brain MRI executed within [SVRTK dockers](https://hub.docker.com/r/fetalsvrtk/svrtk).
 
 
 - The repository and code for deep learning segmentation were designed and created by King's College London.
