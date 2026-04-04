@@ -13,7 +13,7 @@ This repository contains the pipelines for [MONAI](https://github.com/Project-MO
 <img src="info/auto-svrtk-072025.jpg" alt="AUTOSVRTKEXAMPLE" height="700" align ="center" />
 
 
-Development of these analysis tools was supported by projects led by Prof Mary Rutherford, Prof Tomoki Arichi, and Prof Jo Hajnal.
+Development of these analysis tools was supported by projects led by Prof Mary Rutherford, Prof Tomoki Arichi, Prof Jonathan O’Muircheartaigh, Prof Shaihan Malik and Prof Jo Hajnal.
 
 
 
