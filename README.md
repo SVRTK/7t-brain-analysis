@@ -25,7 +25,7 @@ Auto processing scripts
 **AUTOMATED 3D T2w BRAIN SEGMENTATION:**
 
 
-<img src="info/svrtk-labels.jpg" alt="AUTOSVRTKEXAMPLE" height="200" align ="center" />
+<img src="info/plic-7t-pipeline.jpg" alt="AUTOSVRTKEXAMPLE" height="400" align ="center" />
 
 *Input data requirements:*
 - sufficient SNR and image quality, no extreme shading artifacts
