@@ -15,11 +15,11 @@ Development of these analysis tools was supported by projects led by Prof Mary R
 
 
 
-Auto processing 
----------------
+Auto processing scripts 
+------------------------
 
 
-**The automated docker tags are _fetalsvrtk/svrtk:7t_brain_analysis_amd_ OR _fetalsvrtk/svrtk:7t_brain_analysis_arm_ (M1 chip)**
+**The automated docker tags are _fetalsvrtk/svrtk:7t_brain_analysis_amd_ (AMD systems only)**
 
 
 **AUTOMATED 3D T2w BRAIN SEGMENTATION:**
@@ -34,21 +34,19 @@ Auto processing
 - standard radiological space
 - 25-45 weeks PMA
 - no extreme structural anomalies
-- 7T / 3T
+- 7T
 
-_Note: please use 7t_brain_analysis_arm tag for M1 Mac computers._
+Note: you will need >16GB GPU
 
 ```bash
 
 docker pull fetalsvrtk/svrtk:7t_brain_analysis
 
-#auto internal capsule segmentation
-docker run --rm  --mount type=bind,source=LOCATION_ON_YOUR_MACHINE,target=/home/data  fetalsvrtk/svrtk:7t_brain_analysis_amd sh -c ' bash /home/auto-proc-svrtk/scripts/auto-brain-bounti-segmentation-fetal.sh /home/data/your_folder_with_brain_svr_t2_files  /home/data/output_folder_for_segmentations ; '
+#auto multi-ROI brain tissue and internal capsule segmentation
+docker run --rm  --mount type=bind,source=LOCATION_ON_YOUR_MACHINE,target=/home/data  fetalsvrtk/svrtk:7t_brain_analysis_amd sh -c ' bash /home/7t-brain-analysis/scripts/run-7t-neo-brain-segmentation-ic-multi-bounti-042026.sh /home/data/[path_to_t2w_recon.nii.gz] /home/data/[path_to_tmp_processing_folder] /home/data/[path_to_output_multi_tissue_label.nii.gz] /home/data/[path_to_output_ic_wm_label.nii.gz] ; '
 
 
 ```
-
-
 
 
 License
