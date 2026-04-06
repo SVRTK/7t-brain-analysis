@@ -1,0 +1,104 @@
+FROM ubuntu:20.04
+
+#
+# 7t-brain-analysis : deep learning analysis for 7T neonatal MRI
+#
+# Copyright 2018- King's College London
+#
+# The auto SVRTK code and all scripts are distributed under the terms of the
+# [GNU General Public License v3.0: 
+# https://www.gnu.org/licenses/gpl-3.0.en.html. 
+# 
+# This program is free software: you can redistribute it and/or modify 
+# it under the terms of the GNU General Public License as published by 
+# the Free Software Foundation version 3 of the License. 
+# 
+# This software is distributed in the hope that it will be useful, 
+# but WITHOUT ANY WARRANTY; without even the implied warranty of 
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  
+# See the GNU General Public License for more details.
+#
+
+
+
+WORKDIR /bin
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install --no-install-recommends --no-install-suggests -y \
+	git build-essential cmake pigz python python3
+
+RUN git config --global http.sslverify false
+
+RUN git clone https://github.com/rordenlab/dcm2niix.git --branch master --single-branch \
+	&& cd dcm2niix \
+	&& mkdir build && cd build \
+	&& cmake .. \
+	&& make
+
+ENV PATH="$PATH:/bin/dcm2niix/build/bin"
+
+
+WORKDIR /bin
+
+RUN apt-get update && apt-get install --no-install-recommends --no-install-suggests -y \
+	git wget curl unzip
+
+RUN apt-get install -y \
+	build-essential \
+	cmake \
+	cmake-curses-gui \
+	libboost-all-dev \
+	libeigen3-dev \
+	libtbb-dev \
+	libfltk1.3-dev \
+	libinsighttoolkit4-dev
+
+
+RUN git clone https://github.com/SVRTK/MIRTK.git \
+	&& mkdir -p /bin/MIRTK/Packages/SVRTK \ 
+	&& git clone https://github.com/SVRTK/SVRTK.git /bin/MIRTK/Packages/SVRTK \
+	&& mkdir -p /bin/MIRTK/Packages/DrawEM \ 
+	&& git clone https://github.com/MIRTK/DrawEM.git /bin/MIRTK/Packages/DrawEM \
+	&& mkdir -p /bin/MIRTK/build \
+	&& cd /bin/MIRTK/build \
+	&& cmake -D WITH_TBB="ON" -D MODULE_SVRTK="ON" -D MODULE_DrawEM="ON" -D WITH_ITK="ON" .. \
+	&& make -j
+
+ENV PATH="$PATH:/bin/MIRTK/build/bin:/bin/MIRTK/build/lib/tools"
+
+
+WORKDIR /home
+
+RUN git clone https://github.com/SVRTK/7t-brain-analysis.git /home/7t-brain-analysis
+
+RUN apt-get install --no-install-recommends --no-install-suggests -y ca-certificates python3-pip
+
+
+RUN apt install python3-pip
+RUN pip3 list
+RUN pip3 install virtualenv
+
+
+RUN python3 -m pip  install numpy
+
+RUN apt install --no-install-recommends --no-install-suggests -y libeccodes-dev libncurses5-dev python3.8-venv
+
+RUN python3 -m pip install -r /home/auto-proc-svrtk/config/requirements.txt
+
+# Bugfix: without below, cannot import torch within Python (by T.Roberts)
+# Error: OSError: /opt/hpcx/ompi/lib/libmpi.so.40: undefined symbol: opal_hwloc201_hwloc_get_type_depth
+# Fix: https://forums.developer.nvidia.com/t/issues-building-docker-image-from-ngc-container-nvcr-io-nvidia-pytorch-22-py3/209034/5
+ENV PATH="${PATH}:/opt/hpcx/ompi/bin"
+ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/opt/hpcx/ompi/lib"
+
+RUN chmod +x /home/7t-brain-analysis/scripts/*
+
+WORKDIR /home 
+
+
+ENV PATH="$PATH:/bin:/usr/bin:/sbin:/usr/sbin"
+
+ENTRYPOINT [ "" ]
+
+
