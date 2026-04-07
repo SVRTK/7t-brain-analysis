@@ -43,7 +43,7 @@ Note: you will need >16GB GPU
 docker pull fetalsvrtk/svrtk:7t_brain_analysis
 
 #auto multi-ROI brain tissue and internal capsule segmentation
-docker run --rm  --mount type=bind,source=LOCATION_ON_YOUR_MACHINE,target=/home/data  fetalsvrtk/svrtk:7t_brain_analysis_amd sh -c ' bash /home/7t-brain-analysis/scripts/run-7t-neo-brain-segmentation-ic-multi-bounti-042026.sh /home/data/[path_to_t2w_recon.nii.gz] /home/data/[path_to_tmp_processing_folder] /home/data/[path_to_output_multi_tissue_label.nii.gz] /home/data/[path_to_output_ic_wm_label.nii.gz] ; '
+docker run --rm --gpus all --mount type=bind,source=LOCATION_ON_YOUR_MACHINE,target=/home/data  fetalsvrtk/svrtk:7t_brain_analysis_amd sh -c ' bash /home/7t-brain-analysis/scripts/run-7t-neo-brain-segmentation-ic-multi-bounti-042026.sh /home/data/[path_to_t2w_recon.nii.gz] /home/data/[path_to_tmp_processing_folder] /home/data/[path_to_output_multi_tissue_label.nii.gz] /home/data/[path_to_output_ic_wm_label.nii.gz] ; '
 
 
 ```
