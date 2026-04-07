@@ -1,7 +1,7 @@
 #!/usr/bin/env bash -l
 
 
-src=/home/data/7t-brain-analysis
+src=/home/7t-brain-analysis
 mirtk_path=/bin/MIRTK/build/lib/tools
 
 
@@ -172,8 +172,9 @@ echo
   
 weights_wm=${src}/models/patch_atunet_ic_dgm_14_brain_neo_7t_3t_aff_best_metric_model.pth
 
-# unset PYTHONPATH ; 
-python3 ${src}/src/run_monai_patch_atunet_segmentation_1case-2026-${mode}.py 128 14 ${weights_wm} ${proc}/tr-n4-t2.nii.gz ${proc}/wm-lab-tr-t2.nii.gz
+# unset PYTHONPATH ;
+
+python3 ${src}/src/run_monai_patch_atunet_segmentation_1case-2026-flip-14-gpu.py 128 14 ${weights_wm} ${proc}/tr-n4-t2.nii.gz ${proc}/wm-lab-tr-t2.nii.gz
 
 ${mirtk_path}/transform-image ${proc}/wm-lab-tr-t2.nii.gz ${out_wm_lab} -target ${proc}/org-t2.nii.gz  -dofin_i ${proc}/aff-d.dof -labels
 
