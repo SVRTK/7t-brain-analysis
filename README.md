@@ -1,7 +1,7 @@
 Scripts for automated neonatal brain analysis at 7T MRI
 ====================
 
-This repository contains the pipelines for [MONAI](https://github.com/Project-MONAI/MONAI)-based automated analysis for 7T neonatal brain MRI executed within [SVRTK dockers](https://hub.docker.com/r/fetalsvrtk/svrtk).
+This repository contains the pipelines for [MONAI](https://github.com/Project-MONAI/MONAI)-based automated analysis for 7T neonatal brain MRI.
 
 
 - The repository, scripts and DL models were designed and created at the Department of Early Life Imaging, King's College London.
