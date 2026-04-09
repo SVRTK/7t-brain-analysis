@@ -1,6 +1,26 @@
 #!/usr/bin/env bash -l
 
 
+#
+# AI tools for pediatric brain MRI at 7T 
+#
+# Copyright 2026 - King's College London
+#
+# The auto SVRTK code and all scripts are distributed under the terms of the
+# [GNU General Public License v3.0: 
+# https://www.gnu.org/licenses/gpl-3.0.en.html. 
+# 
+# This program is free software: you can redistribute it and/or modify 
+# it under the terms of the GNU General Public License as published by 
+# the Free Software Foundation version 3 of the License. 
+# 
+# This software is distributed in the hope that it will be useful, 
+# but WITHOUT ANY WARRANTY; without even the implied warranty of 
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  
+# See the GNU General Public License for more details.
+#
+
+
 src=/home/7t-brain-analysis
 mirtk_path=/bin/MIRTK/build/lib/tools
 
@@ -20,7 +40,7 @@ if [[ $# -ne 4 ]] ; then
     echo "------------------------------------------------------------"
     echo
     echo "Usage: please use the following format ..."
-    echo "bash /home/7t-brain-analysis/scripts/run-7t-neo-brain-segmentation-ic-multi-bounti-042026.sh [path_to_input_t2w_recon.nii.gz] [path_to_folder_for_tmp_processing] [path_to_output_label.nii.gz] [path_to_wm_label.nii.gz]"
+    echo "bash /home/7t-brain-analysis/scripts/run-7t-neo-brain-segmentation-internal-capsule-multi-bounti-042026.sh [path_to_input_t2w_recon.nii.gz] [path_to_folder_for_tmp_processing] [path_to_output_label.nii.gz] [path_to_wm_label.nii.gz]"
     echo
     echo "------------------------------------------------------------"
     echo
@@ -172,8 +192,7 @@ echo
   
 weights_wm=${src}/models/patch_atunet_ic_dgm_14_brain_neo_7t_3t_aff_best_metric_model.pth
 
-# unset PYTHONPATH ;
-
+# unset PYTHONPATH ; 
 python3 ${src}/src/run_monai_patch_atunet_segmentation_1case-2026-flip-14-gpu.py 128 14 ${weights_wm} ${proc}/tr-n4-t2.nii.gz ${proc}/wm-lab-tr-t2.nii.gz
 
 ${mirtk_path}/transform-image ${proc}/wm-lab-tr-t2.nii.gz ${out_wm_lab} -target ${proc}/org-t2.nii.gz  -dofin_i ${proc}/aff-d.dof -labels
