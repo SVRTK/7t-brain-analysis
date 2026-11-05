@@ -22,7 +22,7 @@ Auto processing scripts
 **The automated docker tags are _fetalsvrtk/svrtk:7t_brain_analysis_amd_ (AMD systems only)**
 
 
-**AUTOMATED 3D T2w BRAIN SEGMENTATION:**
+**AUTOMATED 3D T2w 7T BRAIN SEGMENTATION:**
 
 
 <img src="info/plic-7t-pipeline.jpg" alt="AUTOSVRTKEXAMPLE" height="400" align ="center" />
