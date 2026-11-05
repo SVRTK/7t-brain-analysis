@@ -27,6 +27,9 @@ Auto processing scripts
 
 <img src="info/plic-7t-pipeline.jpg" alt="AUTOSVRTKEXAMPLE" height="400" align ="center" />
 
+
+<img src="info/mb-7t.jpg" alt="AUTOSVRTKEXAMPLE" height="250" align ="center" />
+
 *Input data requirements:*
 - sufficient SNR and image quality, no extreme shading artifacts
 - good quality 3D SVR 
