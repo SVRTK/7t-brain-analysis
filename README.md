@@ -38,6 +38,7 @@ Auto processing scripts
 - 25-45 weeks PMA
 - no extreme structural anomalies
 - 7T
+- 0.5mm or higher isotropic resolution 
 
 Note: you will need >16GB GPU
 
