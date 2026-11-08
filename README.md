@@ -1,4 +1,4 @@
-Scripts for automated neonatal brain analysis at 7T MRI
+Scripts for automated 7T MRI neonatal brain segmenation 
 ====================
 
 This repository contains the pipelines for [MONAI](https://github.com/Project-MONAI/MONAI)-based automated analysis for 7T neonatal brain MRI.
